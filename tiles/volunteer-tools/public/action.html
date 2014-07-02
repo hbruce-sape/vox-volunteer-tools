@@ -1,0 +1,148 @@
+
+<!doctype html>
+<html>
+<head>
+<link rel="stylesheet" type="text/css"
+	href="{{{host}}}/stylesheets/bootstrap.min.css">
+<link rel="stylesheet" type="text/css"
+	href="res://resources/embeddedexperiences/tiles/css/jive-ee.css" />
+<script src="res://resources/scripts/jquery/jquery.placeheld.js"></script>
+<script src="res://resources/scripts/jquery/ui/jquery.ui.core.js"></script>
+<script src="res://resources/scripts/jquery/ui/jquery.ui.widget.js"></script>
+<script src="res://resources/scripts/jquery/ui/jquery.ui.mouse.js"></script>
+<script src="res://resources/scripts/jquery/ui/jquery.ui.draggable.js"></script>
+<script src="res://resources/scripts/jquery/ui/jquery.ui.sortable.js"></script>
+<script src="res://resources/scripts/jquery/ui/jquery.ui.datepicker.js"></script>
+<script src="{{{host}}}/javascripts/jQuery-1.10.2.js"></script>
+<script src="{{{host}}}/javascripts/jquery.base64.min.js"></script>
+<script src="{{{host}}}/javascripts/bootstrap.min.js"></script>
+<script src="{{{host}}}/volunteer-tools/javascripts/action.js"></script>
+<meta http-equiv="Content-Type" value="text/html; charset=utf-8" />
+
+</head>
+
+<body>
+
+	<div class="container-fluid" id="issue-panel">
+		<hr>
+		<div class="container-fluid">
+			<div class="alert-area" style="display: none">
+				<!-- area for alerts to appear -->
+			</div>
+			<form class="j-form" action="{{{host}}}/volunteer-tools/effort"
+				method="post" id="volunteerForm" name="volunteerForm">
+
+				<!-- <fieldset>
+					<label for="metroId">Metro</label>
+					<select id="metroId" name="metroId">
+						<option value="Gurgaon" selected="selected">Gurgaon</option>
+						<option value="NewYork">NewYork</option>
+						<option value="Bangalore">Bangalore</option>
+						<option value="London">London</option>
+					</select>
+
+				</fieldset> -->
+				<fieldset class="clearfix j-list-container js-list-container">
+					<label>Select Metro</label>
+					<div class="j-listBuilder" id="listBuilder">
+						<a class="j-btn-global j-icon-button j-btn-callout" href="#"
+							id="addPlace"> <span class="j-btn-icon"
+							style="background: transparent url(/resources/embeddedexperiences/tiles/images/j-icon-add-person-16.png) no-repeat;"></span>
+							Select Metro
+						</a> <span class="j-searchInstructions" id="place"> </span>
+					</div>
+
+				</fieldset>
+
+				<fieldset>
+					<label for="businessUnitId">Business Unit</label> <input
+						class="j-input-large" id="businessUnitId" name="businessUnitId"
+						type="text">
+				</fieldset>
+
+
+				<fieldset>
+					<label for="accountId">Account</label> <input class="j-input-large"
+						id="accountId" name="accountId" type="text">
+				</fieldset>
+
+				<fieldset>
+					<label for="charitableOrganizationId">Charitable
+						Organization</label> <input class="j-input-large"
+						id="charitableOrganizationId" name="charitableOrganizationId"
+						type="text">
+				</fieldset>
+
+				<fieldset>
+					<label for="date">When did you volunteer?</label> <input id="date"
+						name="date" type="text">
+				</fieldset>
+
+				<fieldset>
+					<label for="time">How long for? (hours)</label> <input
+						class="j-input-large" id="time" name="time" type="text">
+				</fieldset>
+
+				<fieldset>
+					<label for="causes">Causes</label>
+					<select id="causes"	name="causes">
+						<option value="Animals" selected="selected">Animals</option>
+						<option value="Arts & Culture">Arts & Culture</option>
+						<option value="Civil Rights">Civil Rights</option>
+						<option value="Community & Economic Development">Community
+							& Economic Development</option>
+						<option value="Disaster Relief">Disaster Relief</option>
+						<option value="Disease & Medical Research">Disease &
+							Medical Research</option>
+						<option value="Education">Education</option>
+						<option value="Employment Services">Employment Services</option>
+						<option value="Environment">Environment</option>
+						<option value="Health & Nutrition">Health & Nutrition</option>
+						<option value="Housing & Homelessness">Housing &
+							Homelessness</option>
+						<option value="Human Services">Human Services</option>
+						<option value="International Affairs">International
+							Affairs</option>
+						<option value="Justice & Legal Services">Justice & Legal
+							Services</option>
+						<option value="Philanthropy & Capacity Building">Philanthropy
+							& Capacity Building</option>
+						<option value="Religion & Spirituality">Religion &
+							Spirituality</option>
+						<option value="Science & Technology">Science & Technology</option>
+						<option value="Women's Issues">Women's Issues</option>
+						<option value="Youth Development">Youth Development</option>
+					</select>
+				</fieldset>
+
+				<!-- People Picker for Who Else Volunteered -->
+				<fieldset class="clearfix j-list-container js-list-container">
+					<label>Who else volunteered?</label>
+					<ul class="j-sortable clearfix" id="list"></ul>
+					<div class="j-listBuilder" id="listBuilder">
+						<a class="j-btn-global j-icon-button j-btn-callout" href="#"
+							id="addToList"> <span class="j-btn-icon"
+							style="background: transparent url(/resources/embeddedexperiences/tiles/images/j-icon-add-person-16.png) no-repeat;"></span>
+							Add a Person
+						</a> <span class="j-searchInstructions"> Search for people to add to the list of volunteers. </span>
+					</div>
+				</fieldset>
+
+				<fieldset>
+					<label for="whatYoudid">What did you do?</label>
+					<textarea class="j-input-large" rows="5" id="whatYouDid"
+						name="whatYouDid"></textarea>
+				</fieldset>
+
+
+				<div class="j-btn-row">
+					<button class="j-btn-global js-button-done" type="button">Save</button>
+				</div>
+
+			</form>
+		</div>
+	</div>
+
+</body>
+</html>
+

@@ -1,0 +1,10 @@
+{
+    "default": {
+        "name": "defaultTemplate",
+        "displayName": "Contains: [Volunteer Tools] ",
+        "description": "[Volunteer Tools] ",
+        "tiles": [
+            "volunteer-tools"
+        ]
+    }
+}

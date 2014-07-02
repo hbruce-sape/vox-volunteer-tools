@@ -1,0 +1,35 @@
+<html>
+<head>
+
+<script src="{{{host}}}/javascripts/jquery-1.8.3.js"></script>
+<script src="{{{host}}}/volunteer-tools/javascripts/main.js"></script>
+<script>
+
+
+</script>
+</head>
+
+<body>
+
+	<div class="j-card" onload="onLoad();">
+		<form class="j-form" id="placeForm" action="/volunteer-tools/configure" method="post">
+
+			<fieldset>
+				<label for="metroId">Select a Metro to display the volunteer efforts for</label>
+				<select id="metroId">
+					<option id="selectedValue" value="" selected="selected">All Metros</option>
+					<option value="1007">Gurgaon</option>
+					<option value="1004">New York</option>
+				</select>
+			</fieldset>
+
+			<div class="j-btn-row">
+				<button id="btn_submit" class="j-btn-global js-button-done" onclick="loadPlace(); " type="button">Submit</button>
+			</div>
+
+		</form>
+	</div>
+
+
+</body>
+</html>

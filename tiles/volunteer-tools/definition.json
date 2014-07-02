@@ -1,0 +1,26 @@
+{
+    "sampleData" : {
+       "title" : "Volunteer Efforts",
+       "contents" : [ {
+            "text" : "A selfless volunteer",
+            "linkDescription" :"Spent many hours supporting good causes at a charitable organization",
+            "linkMoreDescription" : "In a needy location"
+       } ],
+       "config" : {
+           "listStyle" : "peopleList"
+       },
+      "action" : {
+        "text" : "Log Your Volunteer Effort!" 
+      }
+    },
+    "displayName" : "Volunteer Tools",
+    "name" : "volunteer-tools",
+    "description" : "Tools to log and share the individual and group volunteer efforts of employees across the company",
+    "style" : "LIST",
+    "icons" : {
+        "16" : "https://community.jivesoftware.com/servlet/JiveServlet/showImage/102-99994-1-1023036/j.png",
+        "48" : "https://community.jivesoftware.com/servlet/JiveServlet/showImage/102-99994-1-1023036/j.png",
+        "128" : "https://community.jivesoftware.com/servlet/JiveServlet/showImage/102-99994-1-1023036/j.png"
+    },
+    "action": "/volunteer-tools/action"
+}
