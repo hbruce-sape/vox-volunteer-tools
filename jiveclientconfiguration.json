@@ -2,7 +2,6 @@
     "clientUrl": "http://localhost",
     "port": "8090",
     "persistence" : "jive-persistence-mongo",  
-    "databaseUrl" : "localhost:27017/volunteertools",
-    "databaseName" : "volunteertools",
+    "databaseUrl" : "mongodb://localhost:27017/volunteertools",
     "databaseCollections" : [ "effort" ]
 }

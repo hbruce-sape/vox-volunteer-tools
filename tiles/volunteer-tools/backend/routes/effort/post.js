@@ -1,6 +1,6 @@
 var jive = require('jive-sdk');
 var util = require('util');
-var db = require("mongojs").connect(jive.service.options['databaseName'], jive.service.options['databaseCollections']);
+var db = require("mongojs").connect(jive.service.options['databaseUrl'], jive.service.options['databaseCollections']);
 
 function saveEffort(req, callback) {
 

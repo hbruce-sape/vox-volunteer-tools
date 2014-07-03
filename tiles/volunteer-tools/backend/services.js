@@ -1,6 +1,6 @@
 var jive = require("jive-sdk");
 var q = require('q');
-var db = require("mongojs").connect(jive.service.options['databaseName'], jive.service.options['databaseCollections']);
+var db = require("mongojs").connect(jive.service.options['databaseUrl'], jive.service.options['databaseCollections']);
 var volunteerConfig = 'volunteerConfig';
 
 function findAllEfforts(metroId, callback) {
@@ -79,8 +79,8 @@ function getJSONContentFromData(collection) {
                                     "text" : "Comment, Share & Like",
                                     "url" : effort.contentURI
                                 },
-                                "icon" : "https://community.jivesoftware.com/servlet/JiveServlet/showImage/102-99994-1-1023036/j.png"
-//                                "userID" : effort.userInfo[0].userId,
+                                "icon" : "https://community.jivesoftware.com/servlet/JiveServlet/showImage/102-99994-1-1023036/j.png",
+                                "userID" : effort.userInfo[0].userId
 //                                "containerID" : "2001",
 //                                "containerType" : "14"
                             });
