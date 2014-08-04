@@ -3,7 +3,7 @@ var util = require('util');
 var db = require("mongojs").connect(jive.service.options['databaseUrl'], jive.service.options['databaseCollections']);
 
 function saveEffort(req, callback) {
-
+    var created = Date.now();
     var effort = {
         "userInfo" : req.body.userInfo,
         "metroInfo" : req.body.metroInfo,
@@ -15,7 +15,9 @@ function saveEffort(req, callback) {
         "causes" : req.body.causes,
         "whoElseInfo" : req.body.whoElseInfo,
         "whatYouDid" : req.body.whatYouDid,
-        "contentURI" : req.body.contentURI
+        "contentURI" : req.body.contentURI,
+        "created" : created
+
     };
 
     console.log("Volunteer effort to be saved: "+ JSON.stringify(effort, null, 4));

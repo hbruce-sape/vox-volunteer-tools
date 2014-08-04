@@ -27,16 +27,20 @@ var getBlogPostJSON = function() {
     osapi.jive.corev3.places.get({"type":"group", "uri": metroInfo[0].placeURI}).execute(function(response) {
         var metroBlogURI = response.resources.blog.ref;
 
+        // --- Create Blog Post SUBJECT ---
         var subject = '@numberofvolunteers volunteers from @metro supported @causes';
         subject = subject.replace("@numberofvolunteers", whoElseInfo.length + 1);
         subject = subject.replace("@metro", metroInfo[0].displayName);
-        subject = subject.replace("@causes", $("#causes").val());
+        // Add a space after any commas in the case of 2+ causes being selected
+       subject = subject.replace("@causes", $("#causes").val().toString().replace(/,/g, ", "));
 
-        var content = "<body><h3>@numberofvolunteers volunteers from @businessunit dedicated @hours hours of their time on @date in @metro for @charitableorganization, an organization that supports @causes</h3><p /><h3>Hall of Fame</h3><ul>@volunteers</ul><p /><h3>What They Did</h3><p>@whattheydid</p></body>";
+        // --- Create Blog Post CONTENT  ---
+        var content = "<body><h3>@numberofvolunteers volunteers from @businessunit dedicated @hours hours of their time on @date in @metro for @charitableorganization, an organization that supports @causes causes</h3><p /><h3>Hall of Fame</h3><ul>@volunteers</ul><p /><h3>What They Did</h3><p>@whattheydid</p></body>";
         content = content.replace("@numberofvolunteers", whoElseInfo.length + 1);
         content = content.replace("@businessunit", $("#businessUnitId").val());
         content = content.replace("@metro", metroInfo[0].displayName);
-        content = content.replace("@causes", $("#causes").val());
+        // Escape any ampersands in the causes for the content HTML & add a space after any commas in the case of 2+ causes being selected
+        content = content.replace("@causes", $("#causes").val().toString().replace(/&/g, "&amp;").replace(/,/g, ", "));
         content = content.replace("@hours", $("#time").val());
         content = content.replace("@date", $("#date").val());
         content = content.replace("@charitableorganization", $("#charitableOrganizationId").val());
@@ -56,6 +60,16 @@ var getBlogPostJSON = function() {
         content = content.replace("@whattheydid", $("#whatYouDid").val());
 
 
+        // --- Create Blog Post TAGS ---
+        var causes = $("#causes").val();
+        var tags = [];
+        tags.push('csr', 'corporate_social_responsibility', 'volunteer_effort');
+        for (x=0; x < causes.length; x++)
+        {
+             tags.push(causes[x]);
+        }
+
+        // --- Create Blog Post JSON ---
         var blogJson = {
             "type" : "post",
             "subject" : subject,
@@ -71,30 +85,38 @@ var getBlogPostJSON = function() {
                 "type" : "person",
                 "displayName" : userInfo[0].userDisplayName,
                 "id" : userInfo[0].userId
-            }
+            },
+            "tags" : tags
         };
 
+
+        // --- Create Blog Post, Save Volunteer Effort ---
         osapi.jive.corev3.posts.create(blogJson).execute(function (response){
 
-            osapi.http.post({
-                'href' : $("#volunteerForm").attr('action'),
-                'body' : getJSonData(response.permalink),
-                'headers' : {
-                    'Content-Type' : [ 'application/json' ]
-                }
-            }).execute(function(response) {
-                if (response.error) {
-                    alertBox('Error', "Not saved!.");
-                } else {
-                    alertBox('success', "The form has been saved.");
-                  setTimeout(function() {
-                      jive.tile.close(config, {});
-                  }, 1000);
+            if (response.error) {
+                alertBox('Error', "There was an error creating a Blog Post for this effort");
+            } else {
 
-                }
-            });            
+                osapi.http.post({
+                    'href' : $("#volunteerForm").attr('action'),
+                    'body' : getJSonData(response.permalink),
+                    'headers' : {
+                        'Content-Type' : [ 'application/json' ]
+                    }
+                }).execute(function(response) {
+                    if (response.error) {
+                        alertBox('Error', "There was an error saving this effort to the Volunteer Tools Database");
+                    } else {
+                        alertBox('Success', "Thanks, your volunteer effort has been saved!");
+                        setTimeout(function() {
+                            jive.tile.close(config, {});
+                        }, 1000);
+                    }
+                });
 
-         });  
+            }
+
+         });
     });
  
 
@@ -104,8 +126,8 @@ var getBlogPostJSON = function() {
 jive.tile.onOpen(function(config, options) {
 
             config = JSON.parse(JSON.parse(config));
-            console.log("config:", config);
-            console.log("options:", options);
+            console.log("config:", JSON.stringify(config));
+            console.log("options:", JSON.stringify(options));
 
             var tileDefinitions = options.definitions;
              

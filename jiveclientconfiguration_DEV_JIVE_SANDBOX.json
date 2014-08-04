@@ -1,0 +1,7 @@
+{
+    "clientUrl": "http://vox-volunteer-tools-126828.use1-2.nitrousbox.com",
+    "port": "8090",
+    "persistence" : "jive-persistence-mongo",  
+    "databaseUrl" : "mongodb://vvt-app:password@ds041198.mongolab.com:41198/volunteertools",
+    "databaseCollections" : [ "effort" ]
+}

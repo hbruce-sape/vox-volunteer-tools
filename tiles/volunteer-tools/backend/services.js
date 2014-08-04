@@ -7,7 +7,8 @@ function findAllEfforts(metroId, callback) {
     console.log("findAllEfforts ");
     // TODO sort by date effort logged, requires saving in post.js
     var options = {
-        "limit": 5
+        "limit" : 5,
+        "sort" : [['created','desc']]
     }
     db.effort.find({ "metroInfo.metroId" : metroId}, options, function(err, efforts) {
         if (err || !efforts || efforts.length == 0) {
@@ -46,7 +47,7 @@ function getFirstLine(effort) {
 function getSecondLine(effort) {
     var secondline = "Supported @causes";
 //    var secondline = "Supported @causes@where";
-    secondline = secondline.replace("@causes", effort.causes);
+    secondline = secondline.replace("@causes", effort.causes.toString().replace(/,/g, ", "));
 //    if (effort.whoElseVolunteerId) {
 //        secondline = secondline.replace("@where", " at "
 //                .concat(effort.charitableOrganization));
@@ -57,6 +58,21 @@ function getSecondLine(effort) {
     return secondline;
 
 }
+
+function getIconURI(effort) {
+    var iconURIprefix = jive.service.options['clientUrl'] + ":" + jive.service.options['port'] + "/volunteer-tools/images/";
+    var iconURIsuffix = "_48.png";
+    var firstCause;
+    if (Object.prototype.toString.call( effort.causes ) === '[object Array]') {
+        firstCause = effort.causes[0].toString();
+    } else {
+        firstCause = effort.causes;
+    }
+    var iconURI = firstCause.replace("'", "").replace("& ","").replace(/\s/g, "_").toLowerCase();
+
+    return iconURIprefix + iconURI + iconURIsuffix;
+}
+
 function getJSONContentFromData(collection) {
     var jsonArr = [];
     if (collection) {
@@ -64,6 +80,7 @@ function getJSONContentFromData(collection) {
                 .forEach(function(effort) {
                     var firstline = getFirstLine(effort);
                     var secondline = getSecondLine(effort);
+                    var iconURI = getIconURI(effort);
                     jsonArr
                             .push({
                                 // TODO Lookup user name once correct userID
@@ -79,7 +96,7 @@ function getJSONContentFromData(collection) {
                                     "text" : "Comment, Share & Like",
                                     "url" : effort.contentURI
                                 },
-                                "icon" : "https://community.jivesoftware.com/servlet/JiveServlet/showImage/102-99994-1-1023036/j.png",
+                                "icon" : iconURI,
                                 "userID" : effort.userInfo[0].userId
 //                                "containerID" : "2001",
 //                                "containerType" : "14"

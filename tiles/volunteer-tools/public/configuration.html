@@ -12,19 +12,21 @@
 <body>
 
 	<div class="j-card" onload="onLoad();">
-		<form class="j-form" id="placeForm" action="/volunteer-tools/configure" method="post">
+		<form class="j-form" id="placeForm" method="post">
 
 			<fieldset>
 				<label for="metroId">Select a Metro to display the volunteer efforts for</label>
 				<select id="metroId">
 					<option id="selectedValue" value="" selected="selected">All Metros</option>
-					<option value="1007">Gurgaon</option>
-					<option value="1004">New York</option>
+					<option value="1007">LOCAL - Gurgaon</option>
+					<option value="1004">LOCAL - New York</option>
+					<option value="1387">SANDBOX - Gurgaon</option>
+					<option value="1382">SANDBOX - New York</option>
 				</select>
 			</fieldset>
 
 			<div class="j-btn-row">
-				<button id="btn_submit" class="j-btn-global js-button-done" onclick="loadPlace(); " type="button">Submit</button>
+				<button id="btn_submit" class="j-btn-global js-button-done" type="button">Submit</button>
 			</div>
 
 		</form>
